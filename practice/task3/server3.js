@@ -125,15 +125,10 @@ app.get('/fit', (req, res) => {
 var results= [];
 let searchMax = req.query.length;
     for(var i=0; i< campgrounds.length; i++) {
-	    
 	         if(campgrounds[i].lengthLimit >= searchMax) {
-		
 				    results.push({campground: `${campgrounds[i].name}`, location: `${campgrounds[i].town}`,maxLength: campgrounds[i].lengthLimit});
-
                                    }
     }
-	console.log(results);
-
     res.json({campgrounds: results});
 });
 
