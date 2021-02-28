@@ -81,24 +81,6 @@ return answer;
 */
 const roles = (book) => {
     let answer = {};
-  //  let check = [];
-//	for(let x = 0; x<book.length; x++){
-//	check[x] = book[x].role;
-//	}
-//	for(let x = 0; x< check.length; x++){
-//	for(let y = 0; y< check.length; y++){
-//	if(check[x] == check[y] && x != y){
-//	check.splice(y,1,"");	
-//	}
-//	}
-//	}
-//	let l = 0;
-//	for(let i = 0; i< check.length; i++){
-//	if(check[i] != ''){
-//		answer[l]= check[i];
-//		l++;
-//	}
-//	}
   	  for (const books of book) {
 	    if (answer[books.role]) {
 	    answer[books.role].push(books.name);
