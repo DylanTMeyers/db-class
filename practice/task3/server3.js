@@ -123,11 +123,11 @@ for(var i=0; i< campgrounds.length; i++) {
 
 */
 app.get('/fit', (req, res) => {
-var results= 
+var results = []; 
 let searchMax = req.query.length;
     for(var i=0; i< campgrounds.length; i++) {
 	         if(campgrounds[i].lengthLimit >= searchMax) {
-				    results.piush({campground: `${campgrounds[i].name}`, location: `${campgrounds[i].town}`,maxLength: campgrounds[i].lengthLimit});
+				    results.push({campground: `${campgrounds[i].name}`, location: `${campgrounds[i].town}`,maxLength: campgrounds[i].lengthLimit});
                                    }
     }
     res.json({campgrounds: results});
@@ -184,7 +184,6 @@ app.get('/elevation', (req, res) => {
 				results.push({campground: `${campgrounds[i].name}`, elevation: `${campgrounds[i].elevation}`,town: campgrounds[i].town});
 		    }
 		          }
-	    console.log(results);
 
 	    res.json({campgrounds: results});
 });
