@@ -120,13 +120,14 @@ for(var i=0; i< campgrounds.length; i++) {
    whose value is an array of json objects each representing a campground. Each of those Json 
    objects in the array have the keys 'campground', 'location', and 'maxLength'.
 
+
 */
 app.get('/fit', (req, res) => {
-var results= [];
+var results= 
 let searchMax = req.query.length;
     for(var i=0; i< campgrounds.length; i++) {
 	         if(campgrounds[i].lengthLimit >= searchMax) {
-				    results.push({campground: `${campgrounds[i].name}`, location: `${campgrounds[i].town}`,maxLength: campgrounds[i].lengthLimit});
+				    results.piush({campground: `${campgrounds[i].name}`, location: `${campgrounds[i].town}`,maxLength: campgrounds[i].lengthLimit});
                                    }
     }
     res.json({campgrounds: results});
@@ -173,17 +174,17 @@ app.get('/elevation', (req, res) => {
 	let searchDir = req.query.direction
 	    for(var i=0; i< campgrounds.length; i++) {
 
-		                     if(searchDir == "lower"&& campgrounds[i].elevation<searchAlt) {
+		     if(searchDir == "lower"&& campgrounds[i].elevation<searchAlt) {
 
-					                                         results.push({campground: `${campgrounds[i].name}`, elevation: `${campgrounds[i].elevation}`,town: campgrounds[i].town});
+				results.push({campground: `${campgrounds[i].name}`, elevation: `${campgrounds[i].elevation}`,town: campgrounds[i].town});
 
 					                                        }
-		    else if(searchDir == "higher" && campgrounds[i].elevation>searchAlt){
+		     else if(searchDir == "higher" && campgrounds[i].elevation>searchAlt){
 
-results.push({campground: `${campgrounds[i].name}`, elevation: `${campgrounds[i].elevation}`,town: campgrounds[i].town});
+				results.push({campground: `${campgrounds[i].name}`, elevation: `${campgrounds[i].elevation}`,town: campgrounds[i].town});
 		    }
-		        }
-	        console.log(results);
+		          }
+	    console.log(results);
 
 	    res.json({campgrounds: results});
 });
