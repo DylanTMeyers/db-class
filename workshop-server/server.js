@@ -1,4 +1,6 @@
+require("dotenv").config()
 const express = require("express");
+
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -11,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const Pool = require("pg").Pool;
 const config = {
 	host: process.env.DB_HOST,
-	user: "postgres",
-	password: "4chubbycheeKS",
+	user: process.env.DB_USER,
+	password: process.env.DB_PASS,
 	database: "workshop1"
 };
 
