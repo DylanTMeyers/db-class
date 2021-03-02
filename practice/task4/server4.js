@@ -42,7 +42,6 @@ app.get("/searchAttractions",async (req, res) => {
     } catch (err){
         console.log(err);
     }
-
 });
 
 
@@ -58,6 +57,7 @@ app.post("/addAttraction", async (req, res) => {
     try {
         const template1 = "SELECT * FROM attractions WHERE name = $1 AND location = $2 AND url = $3";
         const check = await pool.query(template1, [name, town, theurl]);
+	console.log(check.rowCount);
         if (check.rowCount != 0){
             res.json({status: "attraction already in database"});
         }

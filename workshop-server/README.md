@@ -4,6 +4,16 @@ You are going to be writing Javascript server side code to support people signin
 
 Postman File: [workshop1_postman_collection.json](http://zacharski.org/files/courses/cs350/workshop1_postman_collection.json)
 
+### Prerequisite Tasks
+
+Task | Description
+:--: | :--:
+[Task 1](../../tasks/tasks1) | Getting started with PostgreSQL
+[Task 2](../../tasks/task2) | Getting started with Javascript
+[Task 3](../../tasks/task3) | Your first nodeJS server
+[Task 4](../../tasks/task4) | NodeJS and PostgreSQL
+[Task 4.5](../../tasks/task4.5) | Getting your Node app running on a Google VM
+
 ## Some Guidance
 
 You should first get this running on your development machine (your laptop). By 'get this running' we mean  that you write the code using the VS Code editor on your laptop. You have PostgreSQL installed on your laptop and you load in the SQL file you wrote. You execute the JavaScript code using node. And finally you test the code using Postman. You should get things running perfectly on your development machine before moving your project to the production environment.
@@ -96,4 +106,3 @@ Else if the attendee is already enrolled in the workshop your app should return:
 Else an entry should be added to the database enrolling the attendee into that workshop and your app should return 
 `{ "attendee": "Emily Blunt", "workshop": "React Fundamentals"}`
 as confirmation.  (replacing Emily Blunt and React Fundamentals with the correct information)
-
