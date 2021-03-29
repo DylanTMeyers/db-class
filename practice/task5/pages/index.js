@@ -11,6 +11,7 @@ async handleUpdate(evt) {
 	                this.setState({search: evt.target.value});
 }
 async handleSearch(evt) {
+
 	            const parkInfo = await getInfo(this.state.search);
 	                    console.log(parkInfo);
 	                this.setState({parkInfo});

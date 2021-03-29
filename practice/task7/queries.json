@@ -1,0 +1,14 @@
+{
+  "query1": "SELECT movie.title as film, actor.name as actor from movie join casting on movie.id = casting.movieid join actor on casting.actorid = actor.id where actor.name = 'Nicolas Cage' order by movie.title",
+  "query2": "SELECT movie.score as rating, movie.title as film from movie join casting on movie.id = casting.movieid join actor on casting.actorid = actor.id where actor.name = 'Sandra Bullock' ORDER BY movie.score DESC LIMIT 1",
+  "query3": "SELECT actor.name as actor from actor join casting on actor.id = casting.actorid join movie on casting.movieid = movie.id where movie.title = 'Blade Runner' ORDER BY actor.name",
+ "query4": "SELECT movie.title as film, actor.name as director from movie join casting on movie.id = casting.movieid join actor on casting.actorid = actor.id where actor.id = movie.director order by actor.name,movie.title",
+  
+  "query5": "SELECT actor.name as actor, COUNT(movie.title) as films from actor join casting on actor.id = casting.actorid join movie on casting.movieid = movie.id group by actor.name having COUNT(movie.title)>9 order by films DESC, actor.name",
+  "query6": "SELECT DISTINCT a1.name as actors from actor as a1 join casting as c1 on a1.id = c1.actorid join casting as c2 on c1.movieid = c2.movieid join actor as a2 on a2.id = c2.actorid where a1.name <> 'Michelle Pfeiffer' and a2.name = 'Michelle Pfeiffer' order by a1.name",
+  "query7": "SELECT Artist.Name as artist, COUNT(Album.Title) as albums from Artist join Album on Album.ArtistId = Artist.ArtistId group by Artist.Name order by albums DESC LIMIT 5",
+  "query8": "SELECT Album.Title as album from Album join Artist on Artist.ArtistId = Album.ArtistId WHERE Artist.Name = 'Santana' order by album",
+  "query9": "SELECT e1.FirstName as employee_firstname, e1.LastName as employee_lastname, e2.FirstName as manager_firstname, e2.LastName as manager_lastname from Employee as e1 join Employee as e2 on e1.ReportsTo = e2.EmployeeId where e1.ReportsTo IS NOT NULL Order by employee_lastname,employee_firstname",
+  
+  "query10": "SELECT DISTINCT Artist.Name as artist, Count(InvoiceLine.TrackId) as tracks_sold from InvoiceLine join Track on Track.TrackId = InvoiceLine.TrackId join Album on Album.AlbumId = Track.AlbumId join Artist on Artist.ArtistId = Album.ArtistID group by Artist.Name order by tracks_sold DESC limit 1"
+}
