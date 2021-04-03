@@ -36,19 +36,21 @@ async handleSearch(evt) {
 	              <input
 	                className="input-style"
 	                type="text"
+	    		value={this.state.search}
 	    		onChange={this.handleUpdate.bind(this)}
-	    		onClick={this.handleSearch.bind(this)}
-	                value={this.state.search}
 	              />
 	            </p>
 
-	            <div className="button-style">
+	            <div className="button-style"
+	    onClick={this.handleSearch.bind(this)}>
 		              Submit
+	    
 			              </div>
 	    {this.state.parkInfo ? (
 		             <div>
 		              <h2>{this.state.parkInfo.name}</h2>
-		    <h3>{(parseInt(this.state.parkInfo.acres) * 100).toLocaleString() }</h3>
+		    	      <h3>{this.state.parkInfo.state}</h3>
+		    	      <h3>{(parseInt(this.state.parkInfo.acres)).toLocaleString()} acres</h3>
 		             </div>
 			             ) : null}
 

@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+var dateFormat = require('dateformat');
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -60,6 +60,7 @@ app.get("/list-users",async (req, res) => {
 			const template = "SELECT * FROM users";
 			const response = await pool.query(template); 
 			res.json({users: response.rows});
+
 		}
 		else if(type == "summary"){
 			const template = "SELECT firstname, lastname FROM users";
@@ -100,7 +101,91 @@ app.post("/add-workshop", async (req, res) => {
 	}
 	//
 });
+app.post("/enroll", async (req, res) => {
+	const title = req.body.title;
+	const date = req.body.date;
+	const location = req.body.location;
+	const maxseats = req.body.maxseats;
+	const instructor = req.body.instructor;
+	const username = req.body.username;
 
+	try {
+		const template1 = "SELECT id FROM workshop WHERE title = $1 AND date = $2 AND location = $3 AND maxseats = $4 AND instructor = $5";
+		const check1 = await pool.query(template1, [title, date, location, maxseats, instructor]);
+		if (check1.rows[0] == undefined){
+			res.json({status: "workshop does not exist"});
+
+		}else{
+			const template2 = "SELECT id FROM users WHERE username = $1";
+			const check2 = await pool.query(template2, [username]);
+
+			const template3 = "SELECT * FROM enroll WHERE usersid = $1 AND workshopid = $2";
+
+			const check3 = await pool.query(template3, [check2.rows[0].id, check1.rows[0].id]);
+
+
+			const template5 = "SELECT * FROM enroll WHERE workshopid = $1";
+
+			const check5 = await pool.query(template5, [check1.rows[0].id]);
+			if(maxseats == check5.rowCount){
+				res.json({status: "no seats available"});
+			}else{
+				console.log(check2.rows);
+				if (check3.rowCount != 0){
+					res.json({status: "user already enrolled"});
+				}
+				else {
+					console.log(check2.rows[0].id);
+					// else let's insert it
+					const template4 = "INSERT INTO enroll (usersid, workshopid) VALUES ($1, $2)"
+					const response = await pool.query(template4, [check2.rows[0].id, check1.rows[0].id]);
+					res.json({status: "user added"});
+				}
+			}
+		}
+	} catch (err){
+		// whoops
+		console.log(err);
+	}
+	//
+});
+app.get("/list-workshops",async (req, res) => {
+	try{
+		const template = "SELECT title, date, location FROM workshop";
+		const response = await pool.query(template);
+		for(let i =0; i<response.rowCount; i++){
+			response.rows[i].date = dateFormat(response.rows[i].date, "yyyy-mm-dd");
+		}
+		res.json({workshops:response.rows } );
+
+
+
+	} catch (err){
+		console.log(err);
+	}
+});
+app.get("/attendees",async (req, res) => {
+	try{
+		        const title = req.query.title;
+		        const date = req.query.date;
+		        const location = req.query.location;   
+		const template1 = "Select * from workshop where location = $1 AND date = $2 AND title = $3";
+		const response1 = await pool.query(template1,[location, date, title]);
+
+		if(response1.rowCount == 0){
+		res.json({error: "workshop does not exist"});
+		}
+		else{
+		const template = "SELECT users.firstname, users.lastname FROM users JOIN enroll on users.id = enroll.usersid join workshop on enroll.workshopid = workshop.id WHERE workshop.location = $1 AND workshop.date = $2 AND workshop.title = $3"; 
+		const response = await pool.query(template,[location, date, title]);
+		res.json({attendees:response.rows } );
+
+		}
+
+	} catch (err){
+		console.log(err);
+	}
+});
 
 
 
@@ -110,3 +195,4 @@ app.listen(app.get("port"), () => {
 	console.log(`Find the server at http://localhost:${app.get("port")}`);
 	// eslint-disable-line no-console
 });
+

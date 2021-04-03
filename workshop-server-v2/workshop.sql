@@ -3,7 +3,7 @@ DROP DATABASE IF EXISTS workshop;
 CREATE DATABASE workshop;
 \c workshop
 
-CREATE TABLE users (
+CREATE TABLE users(
 	id SERIAL PRIMARY KEY,
 	firstname TEXT NOT NULL,
 	lastname TEXT,
@@ -19,11 +19,9 @@ CREATE TABLE workshop (
 	instructor TEXT
 );
 CREATE TABLE enroll (
-	id SERIAL PRIMARY KEY,
-	title TEXT,
-	dates date,
-	location text,
-	username text,
+	 usersid INTEGER NOT NULL,
+	 workshopid INTEGER NOT NULL,
+	 PRIMARY KEY (usersid, workshopid),
 	 FOREIGN KEY (usersid) REFERENCES users(id),
 	 FOREIGN KEY (workshopid) REFERENCES workshop(id)
 );
