@@ -179,18 +179,11 @@ app.get("/attendees",async (req, res) => {
 		const template = "SELECT users.firstname, users.lastname FROM users JOIN enroll on users.id = enroll.usersid join workshop on enroll.workshopid = workshop.id WHERE workshop.location = $1 AND workshop.date = $2 AND workshop.title = $3"; 
 		const response = await pool.query(template,[location, date, title]);
 		res.json({attendees:response.rows } );
-
 		}
-
 	} catch (err){
 		console.log(err);
 	}
 });
-
-
-
-
-
 app.listen(app.get("port"), () => {
 	console.log(`Find the server at http://localhost:${app.get("port")}`);
 	// eslint-disable-line no-console
