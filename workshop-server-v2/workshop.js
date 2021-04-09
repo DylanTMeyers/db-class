@@ -45,12 +45,14 @@ app.post("/create-user", async (req, res) => {
 	//
 });
 app.delete("/delete-user", async (req,res) =>{
-
 	const username = req.body.username;
 	const template2 = "DELETE FROM users where username = $1"
 	const response = await pool.query(template2, [username]);
 	res.json({status: "deleted"});
 });
+
+
+
 
 
 app.get("/list-users",async (req, res) => {
