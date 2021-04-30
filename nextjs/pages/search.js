@@ -14,6 +14,8 @@ class Home extends React.Component {
 		const parkInfo = await getInfo(this.state.search);
 		console.log(parkInfo);
 		this.setState({parkInfo});
+		this.setState({button:"pushed"});
+		this.setState({searched: this.state.search});
 		// add the information to the state
 	}
 	render() {
@@ -40,14 +42,19 @@ class Home extends React.Component {
 			onClick={this.handleSearch.bind(this)}>
 			Submit
 			</div>
-			{this.state.parkInfo ? (
+			{this.state.button !=null? (
+			this.state.parkInfo != null ? (
 				<div>
 				<h2>{this.state.parkInfo.name}</h2>
 				<img src= {this.state.parkInfo.image_url} className="App-logo" />
 				<h2>{this.state.parkInfo.closest_town}</h2>
 				<h3>{this.state.parkInfo.description}</h3>
 				</div>
-			) : null}
+			) :  <div>
+		<h2>{this.state.searched + " Campground Not Found"}</h2>
+		</div>): null}
+
+			 
 			<br />
 			<style jsx>{`
 						  .button-style {
