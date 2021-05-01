@@ -34,7 +34,7 @@ app.post("/create-user", async (req, res) => {
 		}
 		else {
 			// else let's insert it
-			const template2 = "INSERT INTO users (firstname, lastname, username, email) VALUES ($1, $2, $3, $4)"
+			const template2 = "INSERT INTO users (firstname, lastname, username, email) VALUES ($1, $2, $3, $4)";
 			const response = await pool.query(template2, [firstname, lastname, username, email]);
 			res.json({status: "user added"});
 		}
@@ -44,11 +44,19 @@ app.post("/create-user", async (req, res) => {
 	}
 	//
 });
+<<<<<<< HEAD
+app.delete('/delete-user', async (req, res) => {
+        const usern = req.body.username;
+                        const template2 = "Delete from users where username = $1";
+                        const response = await pool.query(template2, [usern]);
+                        res.json({status: "deleted"});
+=======
 app.delete("/delete-user", async (req,res) =>{
 	const username = req.body.username;
 	const template2 = "DELETE FROM users where username = $1"
 	const response = await pool.query(template2, [username]);
 	res.json({status: "deleted"});
+>>>>>>> 7d16158c434276bba9201ade2e2615b66b21511f
 });
 
 
