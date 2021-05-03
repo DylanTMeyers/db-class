@@ -1,4 +1,4 @@
-require("dotenv").config();
+irequire("dotenv").config();
 const QUERY = require("./queries.json");
 const assert = require("assert").strict;
 

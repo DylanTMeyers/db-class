@@ -8,7 +8,6 @@ class Home extends React.Component {
         }
         async handleUpdate(evt) {
 
-<<<<<<< HEAD
 		this.setState({search: evt.target.value});
 	}
 	async handleSearch(evt) {
