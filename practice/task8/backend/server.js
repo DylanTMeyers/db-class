@@ -24,8 +24,7 @@ app.get("/api/re", async (req, res) => {
 	const id = req.query.id;
 	
 	        lols.map((no) =>{
-			if(no._id == id){
-				
+			if(no._id == id){	
 			res.json(no);
 			}
 		});

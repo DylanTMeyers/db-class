@@ -65,6 +65,7 @@ app.post("/addAttraction", async (req, res) => {
             // else let's insert it
             const template2 = "INSERT INTO attractions (name, location, url) VALUES ($1, $2, $3)"
             const response = await pool.query(template2, [name, town, theurl]);
+		console.log(response.rows);
             res.json({status: "added"});
         }
     } catch (err){
@@ -301,6 +302,7 @@ app.post("/addCampground", async (req, res) => {
 		    }else {				                // else let's insert it
 			 const template2 = "INSERT INTO campgrounds (name, location, maxlength,elevation,sites,padtype) VALUES ($1, $2, $3, $4, $5, $6)"
 			 const response = await pool.query(template2, [name, town, maxlength, elevation, sites, padtype]);
+			    console.log(response);
 			 res.json({status: "added"});
 			       }
 	     } catch (err){

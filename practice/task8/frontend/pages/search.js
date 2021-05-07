@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from "react";
-import Post from "./[id].js";
 import Layout from "../components/MyLayout.js";
 class Home extends React.Component {
 	constructor(props) {
@@ -53,16 +52,16 @@ class Home extends React.Component {
 			{ this.state.array ? (
 				<div>
 				{this.state.array.map((camps, lo) =>(
-					 <li key={camps.id}>
+					 
 			<Link href="/[id]" as={`/${camps._id}`} >
 				
 					<h3>
 					{camps._source.name}
-					{camps._source.closest_town}
+				i	{camps._source.closest_town}
 					({camps._score})
 					</h3>
 					</Link>
-					   </li>
+					   
 				))};
 				</div>
 			) : null}
@@ -121,4 +120,4 @@ class Home extends React.Component {
 		);
 	}
 }
-export default Home;
+export default Home
